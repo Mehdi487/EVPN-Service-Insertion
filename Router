@@ -66,14 +66,14 @@ interface GigabitEthernet0/0
  speed auto
  media-type rj45
 !
-interface GigabitEthernet0/0.512
+interface GigabitEthernet0/0.54
  no shutdown
- encapsulation dot1Q 512
+ encapsulation dot1Q 54
  ip address 10.99.55.123 255.255.255.0
 !
-interface GigabitEthernet0/0.513
+interface GigabitEthernet0/0.55
  no shutdown
- encapsulation dot1Q 513
+ encapsulation dot1Q 55
  ip address 10.99.54.123 255.255.255.0
 !
 interface GigabitEthernet0/1
@@ -113,35 +113,6 @@ ipv6 ioam timestamp
 !
 !
 control-plane
-!
-banner exec ^C
-**************************************************************************
-* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
-* education. IOSv is provided as-is and is not supported by Cisco's      *
-* Technical Advisory Center. Any use or disclosure, in whole or in part, *
-* of the IOSv Software or Documentation to any third party for any       *
-* purposes is expressly prohibited except as otherwise authorized by     *
-* Cisco in writing.                                                      *
-**************************************************************************^C
-banner incoming ^C
-**************************************************************************
-* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
-* education. IOSv is provided as-is and is not supported by Cisco's      *
-* Technical Advisory Center. Any use or disclosure, in whole or in part, *
-* of the IOSv Software or Documentation to any third party for any       *
-* purposes is expressly prohibited except as otherwise authorized by     *
-* Cisco in writing.                                                      *
-**************************************************************************^C
-banner login ^C
-**************************************************************************
-* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
-* education. IOSv is provided as-is and is not supported by Cisco's      *
-* Technical Advisory Center. Any use or disclosure, in whole or in part, *
-* of the IOSv Software or Documentation to any third party for any       *
-* purposes is expressly prohibited except as otherwise authorized by     *
-* Cisco in writing.                                                      *
-**************************************************************************^C
-!
 line con 0
  exec-timeout 0 0
 line aux 0
