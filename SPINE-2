@@ -8,9 +8,9 @@ set system processes dhcp-service traceoptions file dhcp_logfile
 set system processes dhcp-service traceoptions file size 10m
 set system processes dhcp-service traceoptions level all
 set system processes dhcp-service traceoptions flag packet
-set interfaces ge-0/0/3 unit 0 family inet address 172.16.23.0/31
-set interfaces ge-0/0/4 unit 0 family inet address 172.16.24.0/31
-set interfaces ge-0/0/5 unit 0 family inet address 172.16.25.0/31
+set interfaces ge-0/0/3 unit 0 family inet address 200.1.63.0/31
+set interfaces ge-0/0/4 unit 0 family inet address 200.1.64.0/31
+set interfaces ge-0/0/5 unit 0 family inet address 200.1.65.0/31
 set interfaces fxp0 unit 0 family inet dhcp vendor-id Juniper-vmx-VM65711CFE55
 set interfaces lo0 unit 0 family inet address 2.2.2.2/32
 set routing-options router-id 2.2.2.2
@@ -21,9 +21,9 @@ set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export Export-Lo
 set protocols bgp group UNDERLAY local-as 64513
 set protocols bgp group UNDERLAY multipath multiple-as
-set protocols bgp group UNDERLAY neighbor 172.16.23.1 peer-as 64514
-set protocols bgp group UNDERLAY neighbor 172.16.24.1 peer-as 64515
-set protocols bgp group UNDERLAY neighbor 172.16.25.1 peer-as 64516
+set protocols bgp group UNDERLAY neighbor 200.1.63.1 peer-as 64514
+set protocols bgp group UNDERLAY neighbor 200.1.64.1 peer-as 64515
+set protocols bgp group UNDERLAY neighbor 200.1.65.1 peer-as 64516
 set protocols bgp group OVERLAY type internal
 set protocols bgp group OVERLAY local-address 2.2.2.2
 set protocols bgp group OVERLAY family evpn signaling
@@ -34,8 +34,3 @@ set protocols bgp group OVERLAY neighbor 1.1.1.1
 set protocols bgp group OVERLAY neighbor 3.3.3.3
 set protocols bgp group OVERLAY neighbor 4.4.4.4
 set protocols bgp group OVERLAY neighbor 5.5.5.5
-set policy-options policy-statement Export-Lo term 1 from protocol direct
-set policy-options policy-statement Export-Lo term 1 from interface lo0.0
-set policy-options policy-statement Export-Lo term 1 then accept
-set policy-options policy-statement LB term 1 then load-balance per-packet
-set policy-options policy-statement LB term 1 then accept
