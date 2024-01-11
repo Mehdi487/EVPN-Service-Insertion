@@ -69,12 +69,12 @@ interface GigabitEthernet0/0
 interface GigabitEthernet0/0.54
  no shutdown
  encapsulation dot1Q 54
- ip address 10.99.55.123 255.255.255.0
+ ip address 190.99.55.123 255.255.255.0
 !
 interface GigabitEthernet0/0.55
  no shutdown
  encapsulation dot1Q 55
- ip address 10.99.54.123 255.255.255.0
+ ip address 190.99.54.123 255.255.255.0
 !
 interface GigabitEthernet0/1
  no shutdown
@@ -105,8 +105,8 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
-ip route 0.0.0.0 0.0.0.0 10.99.54.14
-ip route 0.0.0.0 0.0.0.0 10.99.55.14
+ip route 0.0.0.0 0.0.0.0 190.99.54.14
+ip route 0.0.0.0 0.0.0.0 190.99.55.14
 !
 ipv6 ioam timestamp
 !
