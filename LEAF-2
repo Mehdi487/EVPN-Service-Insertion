@@ -17,13 +17,13 @@ set system syslog file interactive-commands interactive-commands any
 set system extensions providers juniper license-type juniper deployment-scope commercial
 set system extensions providers chef license-type juniper deployment-scope commercial
 set interfaces et-0/0/0 unit 0 family inet dhcp vendor-id Juniper-qfx10002-72q
-set interfaces xe-0/0/0 unit 0 family inet address 172.16.14.1/31
+set interfaces xe-0/0/0 unit 0 family inet address 200.1.54.1/31
 set interfaces xe-0/0/0:0 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
 set interfaces xe-0/0/0:1 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
 set interfaces xe-0/0/0:2 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
 set interfaces xe-0/0/0:3 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
 set interfaces et-0/0/1 unit 0 family inet dhcp vendor-id Juniper-qfx10002-72q
-set interfaces xe-0/0/1 unit 0 family inet address 172.16.24.1/31
+set interfaces xe-0/0/1 unit 0 family inet address 200.1.64.1/31
 set interfaces xe-0/0/1:0 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
 set interfaces xe-0/0/1:1 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
 set interfaces xe-0/0/1:2 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
@@ -427,24 +427,14 @@ set interfaces xe-0/0/71:2 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s
 set interfaces xe-0/0/71:3 unit 0 family inet dhcp vendor-id Juniper-qfx5100-48s-6q
 set interfaces em0 unit 0 family inet dhcp
 set interfaces em1 unit 0 family inet address 169.254.0.2/24
-set interfaces irb unit 512 family inet address 10.99.55.201/24 virtual-gateway-address 10.99.55.1
-set interfaces irb unit 512 virtual-gateway-v4-mac 00:aa:11:bb:22:cc
-set interfaces irb unit 513 family inet address 10.99.54.201/24 virtual-gateway-address 10.99.54.1
-set interfaces irb unit 513 virtual-gateway-v4-mac 00:a1:11:bb:22:cc
+set interfaces irb unit 55 family inet address 10.99.55.201/24 virtual-gateway-address 10.99.55.1
+set interfaces irb unit 55 virtual-gateway-v4-mac 00:aa:11:bb:22:cc
 set interfaces lo0 unit 0 family inet address 4.4.4.4/32
 set forwarding-options storm-control-profiles default all
-set policy-options policy-statement Export-Lo term 1 from protocol direct
-set policy-options policy-statement Export-Lo term 1 from interface lo0.0
-set policy-options policy-statement Export-Lo term 1 then accept
-set policy-options policy-statement LB term 1 then load-balance per-packet
-set policy-options policy-statement LB term 1 then accept
 set routing-options forwarding-table export LB
 set routing-options forwarding-table chained-composite-next-hop ingress evpn
 set routing-options router-id 4.4.4.4
 set routing-options autonomous-system 65530
-set protocols igmp interface irb.512
-set protocols pim rp static address 10.99.55.254
-set protocols pim interface irb.512 distributed-dr
 set protocols evpn encapsulation vxlan
 set protocols evpn multicast-mode ingress-replication
 set protocols evpn extended-vni-list all
@@ -452,28 +442,16 @@ set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export Export-Lo
 set protocols bgp group UNDERLAY local-as 64515
 set protocols bgp group UNDERLAY multipath multiple-as
-set protocols bgp group UNDERLAY neighbor 172.16.14.0 peer-as 64512
-set protocols bgp group UNDERLAY neighbor 172.16.24.0 peer-as 64513
+set protocols bgp group UNDERLAY neighbor 200.1.54.0 peer-as 64512
+set protocols bgp group UNDERLAY neighbor 200.1.64.0 peer-as 64513
 set protocols bgp group OVERLAY type internal
 set protocols bgp group OVERLAY local-address 4.4.4.4
 set protocols bgp group OVERLAY family evpn signaling
 set protocols bgp group OVERLAY local-as 65530
 set protocols bgp group OVERLAY neighbor 1.1.1.1
 set protocols bgp group OVERLAY neighbor 2.2.2.2
-set protocols igmp-snooping vlan default
-set protocols igmp-snooping vlan DATA1 l2-querier source-address 10.99.55.201
-set protocols igmp-snooping vlan DATA1 proxy
 set switch-options vtep-source-interface lo0.0
 set switch-options route-distinguisher 4.4.4.4:500
 set switch-options vrf-target target:65530:500
-set vlans DATA1 vlan-id 512
-set vlans DATA1 l3-interface irb.512
-set vlans DATA1 vxlan vni 20512
-set vlans DATA1 vxlan ingress-node-replication
-set vlans DATA2 vlan-id 513
-set vlans DATA2 l3-interface irb.513
-set vlans DATA2 vxlan vni 20513
-set vlans DATA2 vxlan ingress-node-replication
-set vlans default vlan-id 1
 
 {master:0}
